@@ -43,12 +43,14 @@ class ItemModal extends Component {
   };
 
   render() {
+    const { error } = this.props.item;
     return (
       <div>
         <Button
           color="dark"
           style={{ marginBottom: "2rem" }}
           onClick={this.toggle}
+          hidden={error}
         >
           Add Item
         </Button>
