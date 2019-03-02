@@ -2,12 +2,14 @@ import {
   GET_ITEMS,
   ADD_ITEM,
   DELETE_ITEM,
-  ITEMS_LOADING
+  ITEMS_LOADING,
+  ITEMS_ERROR
 } from "../actions/types";
 
 const initialState = {
   items: [],
-  loading: false
+  loading: false,
+  error: false
 };
 
 export default function(state = initialState, action) {
@@ -32,6 +34,13 @@ export default function(state = initialState, action) {
       return {
         ...state,
         loading: true
+      };
+    case ITEMS_ERROR:
+      return {
+        ...state,
+        items: action.payload,
+        error: true,
+        loading: false
       };
     default:
       return state;

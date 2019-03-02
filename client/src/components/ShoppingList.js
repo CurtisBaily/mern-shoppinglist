@@ -15,7 +15,7 @@ class ShoppingList extends Component {
   };
 
   render() {
-    const { items } = this.props.item;
+    const { items, error } = this.props.item;
     return (
       <Container>
         <ListGroup>
@@ -28,6 +28,7 @@ class ShoppingList extends Component {
                     color="danger"
                     size="sm"
                     onClick={this.onDeleteClick.bind(this, _id)}
+                    disabled={error}
                   >
                     &times;
                   </Button>
