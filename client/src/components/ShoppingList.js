@@ -30,7 +30,7 @@ class ShoppingList extends Component {
                     onClick={this.onDeleteClick.bind(this, _id)}
                     disabled={error}
                   >
-                    &times;
+                    <i className="fas fa-times" />
                   </Button>
                   {name}
                 </ListGroupItem>
