@@ -1,4 +1,5 @@
 const express = require("express");
+const session = require("express-session");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const path = require("path");
@@ -11,7 +12,31 @@ const app = express();
 app.use(bodyParser.json());
 
 // Configuration items
-const { mongoURI, port } = require("./config");
+const {
+  mongoURI,
+  port,
+  NODE_ENV,
+  SESS_LIFETIME,
+  SESS_NAME,
+  SESS_SECRET
+} = require("./config");
+
+const IN_PROD = NODE_ENV === "production";
+
+// Session cookie
+app.use(
+  session({
+    name: SESS_NAME,
+    resave: false,
+    saveUninitialized: true,
+    secret: SESS_SECRET,
+    cookie: {
+      maxAge: SESS_LIFETIME,
+      sameSite: true,
+      secure: IN_PROD
+    }
+  })
+);
 
 // Connect to MongoDB
 mongoose
